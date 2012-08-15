@@ -1,1 +1,1 @@
-python-memcached
+python3-memcached

@@ -12,5 +12,5 @@ setup(
         author_email='wes [at] 1stvamp [dot] org',
         url='http://github.com/1stvamp/oneversion/tree/master/python/memorised/',
         packages=['memorised'],
-        install_requires=['python-memcached'],
+        install_requires=['python3-memcached'],
 )

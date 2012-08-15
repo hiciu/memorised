@@ -119,9 +119,9 @@ class TestMemorise(unittest.TestCase):
                 self.assertEqual(d1, d3)
 
 def run():
-        print
-        print "Running memorised.decorators test suite..."
-        print
+        print()
+        print("Running memorised.decorators test suite...")
+        print()
         suite =        unittest.TestLoader().loadTestsFromTestCase(TestMemorise)
         unittest.TextTestRunner(verbosity=2).run(suite)
 

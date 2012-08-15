@@ -59,7 +59,7 @@ class memorise(object):
                         # wrapped instances lose frame and no longer contain a
                         # reference to their parent instance/class within this
                         # frame
-                        argnames = fn.func_code.co_varnames[:fn.func_code.co_argcount]
+                        argnames = fn.__code__.co_varnames[:fn.__code__.co_argcount]
                         method = False
                         static = False
                         if len(argnames) > 0:
@@ -71,7 +71,7 @@ class memorise(object):
                         arg_values_hash = []
                         # Grab all the keyworded and non-keyworded arguements so
                         # that we can use them in the hashed memcache key
-                        for i,v in sorted(itertools.chain(itertools.izip(argnames, args), kwargs.iteritems())):
+                        for i,v in sorted(itertools.chain(zip(argnames, args), iter(kwargs.items()))):
                                 if i != 'self':
                                         if i != 'cls':
                                                 arg_values_hash.append("%s=%s" % (i,v))
@@ -97,7 +97,7 @@ class memorise(object):
                                 parent_name = inspect.getmodule(fn).__name__
                         # Create a unique hash of the function/method call
                         key = "%s%s(%s)" % (parent_name, fn.__name__, ",".join(arg_values_hash))
-                        key = md5(key).hexdigest()
+                        key = md5(key.encode('utf-8')).hexdigest()
 
                         if self.mc:
                                 # Try and get the value from memcache
